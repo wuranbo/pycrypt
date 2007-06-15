@@ -88,5 +88,12 @@ PublicKey = read_keys_from_file()
 #cryptFile('TestFile.jpg', 'CryptFile.jpg', PublicKey)
 #decryptFile('CryptFile.jpg', 'decryptFile.jpg', PublicKey)
 
+def getManual():
+	man = 'Incorrect use, please observe the following protocol:\n'
+	man += 'PyCrypt -encode Filename_in Filename_out Password\n'
+	man += 'PyCrypt -decode Filename_in Filename_out Password\n'
+	return man
+
 if (__name__ == '__main__'):
 	#Parse arguments
+	print getManual()
