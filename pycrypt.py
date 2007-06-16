@@ -9,7 +9,12 @@ import sys, getopt
 
 class CypherText:
 
+	__doc__ = """
+	This in an encrypted file. It uses PyCrypt: 
+	http://reachme.web.googlepages.com/pycrypt 
+	"""
 	def __init__(self):
+		self.__www_reachme_web_googlepages_com_dash_pycrypt = ''
 		self.__CypherText = ''
 		self.__trailLen = 0
 		
@@ -79,9 +84,10 @@ def decryptFile(filename_in, filename_out, key):
 	fw.write(message)
 
 def getManual():
-	man = 'Usage:\n'
-	man += 'PyCrypt -encode Filename_in Filename_out Password\n'
-	man += 'PyCrypt -decode Filename_in Filename_out Password\n'
+	man = '~-- PyCrypt V0.1 --~\n'
+	man += 'Usage:\n'
+	man += 'PyCrypt --encrypt Filename_in Filename_out Password\n'
+	man += 'PyCrypt --decrypt Filename_in Filename_out Password\n'
 	man += "\nFor more info, please visit the project's homepage at:\n"
 	man += "http://reachme.web.googlepages.com/pycrypt\n"
 	return man
@@ -95,7 +101,7 @@ System exit code:
 #Returns the parameters of execution of the program
 def parseCommandLine():
 	try:
-		opts, args = getopt.getopt(sys.argv[1:], "hed", ["help","encode","decode"])
+		opts, args = getopt.getopt(sys.argv[1:], "hed", ["help","encrypt","decrypt"])
 	except getopt.error, msg:
 		print 'Cannot parse arguments:'
 		print msg
@@ -111,10 +117,10 @@ def parseCommandLine():
 			print getManual()
 			sys.exit(0)
 			
-		elif o in ("-d", "--decode"):
-			method = 'decode'
-		elif o in ("-e", "--encode"):
-			method = 'encode'
+		elif o in ("-d", "--decrypt"):
+			method = 'decrypt'
+		elif o in ("-e", "--encrypt"):
+			method = 'encrypt'
 		else:
 			print 'Invalid option.'
 			print getManual()
@@ -132,7 +138,7 @@ def parseCommandLine():
 	return (method, filename_in, filename_out, password)
 
 def checkProgArgs(method, filename_in, filename_out, password):
-	if (method != 'encode') and (method != 'decode'):
+	if (method != 'encrypt') and (method != 'decrypt'):
 		print 'ERROR: invalid method: ' + method
 		sys.exit(-1)
 		
@@ -148,11 +154,11 @@ if (__name__ == '__main__'):
 	#Parse command line options
 	(method, filename_in, filename_out, password) = parseCommandLine()
 	checkProgArgs(method, filename_in, filename_out, password)
-	print (method, filename_in, filename_out, password)
+	#print (method, filename_in, filename_out, password)
 	
-	if method == 'encode':
+	if method == 'encrypt':
 		cryptFile(filename_in, filename_out, hashPassword_MD5(password))
-	elif method == 'decode':
+	elif method == 'decrypt':
 		decryptFile(filename_in, filename_out, hashPassword_MD5(password))
 
 #PublicKey = read_keys_from_file()

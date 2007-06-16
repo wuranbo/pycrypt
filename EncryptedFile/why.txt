@@ -1,0 +1,6 @@
+This directory records the format of several encrypted files, one for each version of the program.
+
+It is used to verify that the program version doesn't influence the program's ability to decrypter 
+files that were encoded with an older version of the program.
+
+The sample file used is 'TestFile.jpg' and the password is 'password'
