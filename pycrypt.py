@@ -6,6 +6,8 @@ import hashlib
 import pickle
 #Argument parsing
 import sys, getopt
+#To get a password from the user
+import getpass
 
 class CypherText:
 
@@ -14,7 +16,8 @@ class CypherText:
 	http://reachme.web.googlepages.com/pycrypt 
 	"""
 	def __init__(self):
-		self.__www_reachme_web_googlepages_com_dash_pycrypt = ''
+		self.__ProjectWebpage = ' http://reachme.web.googlepages.com/pycrypt '
+		self.__ProgramVersion = ' 0.2 '
 		self.__CypherText = ''
 		self.__trailLen = 0
 		
@@ -29,7 +32,6 @@ class CypherText:
 		
 	def getTrail(self):
 		return self.__trailLen
-	
 	
 def hashPassword_MD5(Password):
 	m = hashlib.md5()
@@ -84,8 +86,15 @@ def decryptFile(filename_in, filename_out, key):
 	fw.write(message)
 
 def getManual():
-	man = '~-- PyCrypt V0.1 --~\n'
+	man = '-- PyCrypt V0.2 --\n'
 	man += 'Usage:\n'
+	man += 'PyCrypt [mode= -e or -d] [filename_in] [filename_out] [password]\n'
+	man += '-e : Encrypt a file\n'
+	man += '-d : Decrypt a file\n'
+	man += 'The user will be prompted to provide missing information if any.\n'
+	man += '\nExamples:\n'
+	man += 'PyCrypt\n'
+	man += 'PyCrypt -e\n'
 	man += 'PyCrypt --encrypt Filename_in Filename_out Password\n'
 	man += 'PyCrypt --decrypt Filename_in Filename_out Password\n'
 	man += "\nFor more info, please visit the project's homepage at:\n"
@@ -112,7 +121,6 @@ def parseCommandLine():
 	
 	#Process options
 	for o, a in opts:
-
 		if o in ("-h", "--help"):
 			print getManual()
 			sys.exit(0)
@@ -126,14 +134,48 @@ def parseCommandLine():
 			print getManual()
 			sys.exit(2)
 	
-	if len(args) != 3:
-		print 'Incorrect number of arguments.'
+	if len(args) > 3:
+		print 'Too many arguments'
 		print getManual()
 		sys.exit(2)
 	
-	filename_in = args[0]
-	filename_out = args[1]
-	password = args[2]
+	#If not specified, ask for the operation mode		
+	if len(opts) == 0:
+		menu = "Please select one of the following options:\n"
+		menu +="1: Encrypt a file\n"
+		menu +="2: Decrypt a file\n"
+		menu +="(1,2)?"
+		print menu
+		choice = raw_input()
+		
+		while (choice != '1') and (choice != '2'):
+			print menu
+			choice = raw_input()
+		
+		if choice == '1':
+			method = 'encrypt'
+		if choice == '2':
+			method = 'decrypt'
+
+	#If not present, ask for the arguments interactively
+	if len(args) == 0:
+		filename_in = raw_input("Please enter the input filename\n")
+		filename_out = raw_input("Please enter the output filename\n")
+		password = getpass.getpass()
+	
+	if len(args) == 1:
+		filename_in = args[0]
+		filename_out = raw_input("Please enter the output filename\n")
+		password = getpass.getpass()
+	
+	if len(args) == 2:
+		#If the password is not specified, ask for one
+		password = getpass.getpass()
+		
+	if len(args) == 3:
+		filename_in = args[0]
+		filename_out = args[1]
+		password = args[2]
 		
 	return (method, filename_in, filename_out, password)
 
@@ -161,6 +203,7 @@ if (__name__ == '__main__'):
 	elif method == 'decrypt':
 		decryptFile(filename_in, filename_out, hashPassword_MD5(password))
 
+##Use example:
 #PublicKey = read_keys_from_file()
 #cyphertext = encrypt( 'Boobies!', PublicKey )
 #print decrypt( cyphertext, PublicKey )
