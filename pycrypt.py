@@ -139,6 +139,9 @@ def parseCommandLine():
 		print getManual()
 		sys.exit(2)
 	
+	print opts
+	print args
+	
 	#If not specified, ask for the operation mode		
 	if len(opts) == 0:
 		menu = "Please select one of the following options:\n"

@@ -1,0 +1,21 @@
+PyCrypt.
+
+Project's homepage: 
+	http://reachme.web.googlepages.com/pycrypt
+
+Dependencies:
+	-Python (2.5)
+	-Python Cryptography Toolkit:
+		Homepage: http://www.amk.ca/python/code/crypto
+		Version 2.0.1
+
+Functionalities to be added:
+
+	-Drag&Drop Capabilities
+	-Check if filenames provided exist/overwrite something else	
+
+History:
+	v0.2:
+		-Ask for password if not specified in the command line
+	V0.1: 
+		-Initial Release
