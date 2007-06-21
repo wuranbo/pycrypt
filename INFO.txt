@@ -4,18 +4,27 @@ Project's homepage:
 	http://reachme.web.googlepages.com/pycrypt
 
 Dependencies:
-	-Python (2.5)
-	-Python Cryptography Toolkit:
+	-Python (Version 2.5)
+	-Python Cryptography Toolkit (Version 2.0.1):
 		Homepage: http://www.amk.ca/python/code/crypto
-		Version 2.0.1
 
 Functionalities to be added:
+	
+	-Check if filenames provided exist/overwrite something else
+	-GUI?
+	-Check the memory footprint to veryfy if a key could be harvested from memory after an encode/decode
+	XXPriorityXX -Have the program output at the same place as the input file (or bin file)
+	-Check to header to know if it has to encode or decode the file
 
-	-Drag&Drop Capabilities
-	-Check if filenames provided exist/overwrite something else	
+This program is useful because:
+	-Unlike TrueCrypt (which is otherwise excellent), it can be run without administrator rights, which makes pycript perfect to carry around sensible information on a USB stick.	
+
 
 History:
 	v0.2:
+		-Bugs--
+		-Better program interface
 		-Ask for password if not specified in the command line
+		-Drag & drop support
 	V0.1: 
 		-Initial Release

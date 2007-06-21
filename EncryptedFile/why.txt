@@ -1,6 +1,13 @@
 This directory records the format of several encrypted files, one for each version of the program.
 
-It is used to verify that the program version doesn't influence the program's ability to decrypter 
+It is used to verify that the program version doesn't influence the program's ability to decrypt 
 files that were encoded with an older version of the program.
 
 The sample file used is 'TestFile.jpg' and the password is 'password'
+
+
+DecryptMeGetCandy.jpg is a 'challende file'. If you can manage to decrypt it, you win candy.
+Please tell me if you manage to do it. (at reachme.web@gmail.com).
+
+The challenge:
+	To prove that I think this software can be use safely to prevent others from viewing the content of your file, I propose the 'hack it get my credit card challenge'. I took a picture of my credit card, encrypted the picture using pycript, and posted the picture on the internet (see the link below). If you can successfully crack the algorithm, then you are welcome to use my credit card on online websites. I created this challenge to prove my good faith into the encryption system used behid this system.
